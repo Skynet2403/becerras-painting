@@ -4,33 +4,53 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 const testimonials = [
   {
-    name: "Maria Gonzalez",
-    role: "Homeowner",
-    initials: "MG",
+    name: "Karen Biggs",
+    initials: "KB",
     stars: 5,
-    text: "Incredible work on my kitchen. They exceeded all my expectations. The team was professional, clean, and very punctual. My kitchen now looks like it belongs in a magazine.",
+    text: "Great job on our garage ceiling repair/paint! Loved it so much, we had him come back to do siding and paint on the house! Extremely responsive and helpful! Went above and beyond. Sergio and his crew are the best!",
   },
   {
-    name: "Carlos Ramirez",
-    role: "Business Owner",
-    initials: "CR",
+    name: "Laci Budd",
+    initials: "LB",
     stars: 5,
-    text: "They painted the entire facade of my business and it looks spectacular. Customers always comment on how great it looks. Highly recommended.",
+    text: "Sergio and his crew are the best. They repainted our home interior and ceilings and we are so satisfied. They were so mindful and respectful of our home during the job, which I really appreciated. Their work was fantastic and professional - sharp lines, even coats and no mess. We would definitely hire again.",
   },
   {
-    name: "Laura Mendez",
-    role: "Interior Designer",
-    initials: "LM",
+    name: "Jennifer Lowry",
+    initials: "JL",
     stars: 5,
-    text: "As a designer, I am very demanding with finishes. Becerras Painting perfectly understood my vision and the result was flawless. They are my go-to team.",
+    text: "Sergio and his team did a great job painting our interior. Showed up on time, didn't leave early, was respectful of the house, fair price, and did what he said he would do. Highly recommend.",
   },
   {
-    name: "Robert Torres",
-    role: "Homeowner",
-    initials: "RT",
+    name: "Mary Isaacson",
+    initials: "MI",
     stars: 5,
-    text: "They completely remodeled our bathroom and now it's a true spa. The quality of the materials and the fine craftsmanship is evident in every detail.",
+    text: "These guys are great. Love a contractor that shows up as scheduled, listens to the customer, does beautiful work and the prices are great. They stained our deck.",
   },
+  {
+    name: "Andrew Biggs",
+    initials: "AB",
+    stars: 5,
+    text: "Awesome job, super easy to work with and gives you a fair deal and are very quick at work!",
+  },
+  {
+    name: "Kathy Locker",
+    initials: "KL",
+    stars: 5,
+    text: "Wonderful experience with Sergio and his team! Highly recommend!",
+  },
+  {
+    name: "Brooke Davis",
+    initials: "BD",
+    stars: 5,
+    text: "I definitely recommend them for any painting job you may need done! They care about their clients and do great work!",
+  },
+  {
+    name: "Becuellar Gio",
+    initials: "BG",
+    stars: 5,
+    text: "Very good job very clean and good price thanks sergio!!",
+  }
 ]
 
 export function Testimonials() {
@@ -54,9 +74,9 @@ export function Testimonials() {
           {testimonials.map((t) => (
             <Card
               key={t.name}
-              className="border-border bg-card transition-shadow hover:shadow-xl rounded-2xl overflow-hidden"
+              className="border-border bg-card transition-shadow hover:shadow-xl rounded-2xl overflow-hidden h-full"
             >
-              <CardContent className="p-6">
+              <CardContent className="p-6 flex flex-col h-full">
                 <div className="mb-4 flex gap-1">
                   {Array.from({ length: t.stars }).map((_, i) => (
                     <Star
@@ -66,10 +86,12 @@ export function Testimonials() {
                     />
                   ))}
                 </div>
-                <p className="mb-6 text-sm text-muted-foreground leading-relaxed font-light">
+                
+                <p className="mb-6 text-sm text-muted-foreground leading-relaxed font-light flex-grow">
                   {`"${t.text}"`}
                 </p>
-                <div className="flex items-center gap-3 border-t border-border pt-4">
+
+                <div className="flex items-center gap-3 border-t border-border pt-4 mt-auto">
                   <Avatar className="h-10 w-10">
                     <AvatarFallback className="bg-primary/10 text-primary text-sm font-bold">
                       {t.initials}
@@ -77,7 +99,9 @@ export function Testimonials() {
                   </Avatar>
                   <div>
                     <p className="text-sm font-bold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-tighter">{t.role}</p>
+                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-tighter">
+                      Verified Client
+                    </p>
                   </div>
                 </div>
               </CardContent>

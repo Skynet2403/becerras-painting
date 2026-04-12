@@ -24,7 +24,7 @@ const services = [
     icon: Droplets,
     title: "Specialty finishes",
     description:
-      "Decorative textures, Venetian stucco, and unique effects that add character and luxury to your walls.",
+      "Decorative textures and unique effects that add character and luxury to your walls.",
   },
   {
     icon: Palette,
@@ -46,7 +46,7 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-16 text-center">
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
-            Our Services
+            About our Services
           </span>
           <h2 className="font-serif text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance italic">
             Everything your <span className="text-primary not-italic">home needs</span>

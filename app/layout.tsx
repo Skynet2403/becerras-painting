@@ -8,7 +8,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 
 export const metadata: Metadata = {
   title: 'ColorCraft Pro | Painting & Remodeling',
-  description: 'Transformamos tu hogar con servicios profesionales de pintura y remodelacion. Descubre nuestro catalogo de proyectos realizados.',
+  description: 'We transform your home with professional painting and remodeling services. Check out our portfolio of completed projects.',
   icons: {
     icon: [
       {

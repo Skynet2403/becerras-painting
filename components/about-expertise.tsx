@@ -13,7 +13,8 @@ export function AboutExpertise() {
     "Siding Repair & Install",
     "Rotten wood replacement",
     "Custom shutters from scratch",
-    "Professional roofing"
+    "Professional roofing",
+    "Professional Cleaning Services"
   ]
 
   return (
@@ -47,7 +48,6 @@ export function AboutExpertise() {
               ))}
             </div>
 
-            {/* Ajuste de fondo para que resalte sobre el gris secundario */}
             <div className="inline-block p-6 bg-background rounded-3xl border border-primary/20 shadow-sm backdrop-blur-sm">
               <p className="text-2xl font-serif font-bold text-foreground italic leading-none">
                 Interior & Exterior Specialists.
@@ -58,13 +58,12 @@ export function AboutExpertise() {
             </div>
           </div>
 
-          {/* Image Column */}
           <div className="relative order-1 lg:order-2">
             <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070" 
+                src="/images/kitchen-init.jpg" 
                 alt="Construction and Remodeling professionals" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
             </div>

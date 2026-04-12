@@ -26,9 +26,10 @@ export function Footer() {
             </h4>
             <ul className="flex flex-col gap-2 text-sm text-background/60">
               <li><a href="#services" className="transition-colors hover:text-primary">Interior & Exterior painting</a></li>
-              <li><a href="#services" className="transition-colors hover:text-primary">Kitchen remodeling</a></li>
-              <li><a href="#services" className="transition-colors hover:text-primary">Cabinet refinishing</a></li>
-              <li><a href="#services" className="transition-colors hover:text-primary">Drywall & Texture repair</a></li>
+              <li><a href="#services" className="transition-colors hover:text-primary">Full remodeling</a></li>
+              <li><a href="#services" className="transition-colors hover:text-primary">Specialty finishes</a></li>
+              <li><a href="#services" className="transition-colors hover:text-primary">Color consultation</a></li>
+              <li><a href="#services" className="transition-colors hover:text-primary">Maintenance</a></li>
             </ul>
           </div>
 
