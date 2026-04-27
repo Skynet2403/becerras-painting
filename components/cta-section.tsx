@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Phone, Mail, MapPin, Facebook } from "lucide-react"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 export function CtaSection() {
   const [loading, setLoading] = useState(false)
@@ -28,9 +29,7 @@ export function CtaSection() {
 
     await fetch("/api/contact", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
 
@@ -41,168 +40,161 @@ export function CtaSection() {
   return (
     <section id="contact" className="bg-primary py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+
+        {/* SOLO 1 ANIMACIÓN GLOBAL (PERFORMANCE OPTIMO) */}
+        <motion.div
+          className="grid items-center gap-12 lg:grid-cols-2"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+
+          {/* LEFT CONTENT */}
           <div>
-            <h2 className="font-serif text-3xl font-bold text-primary-foreground sm:text-4xl lg:text-5xl text-balance italic">
+
+            <h2 className="font-serif text-3xl font-bold text-primary-foreground sm:text-4xl lg:text-5xl italic">
               Ready to transform your home?
             </h2>
+
             <p className="mt-4 max-w-lg text-lg text-primary-foreground/80 leading-relaxed font-light">
-              Contact us today and get a free estimate. Our team of experts is 
-              ready to bring the home of your dreams to life with the best quality in Oklahoma.
-
+              Contact us today and get a free estimate. Our team is ready to bring your vision to life with premium craftsmanship.
               <br /><br />
-
               <span className="sm:hidden font-medium">
-                Tap any option below to call, message, or get directions instantly.
+                Tap any option below to call, email or locate us instantly.
               </span>
             </p>
 
-            <div className="mt-8 flex flex-col gap-6">
+            {/* CONTACT OPTIONS (sin scroll animation, solo hover) */}
+            <div className="mt-10 flex flex-col gap-6">
 
-              <a
-                href="tel:+19186004936"
-                className="mt-8 flex flex-col gap-2 group"
-              >
-                <div className="flex items-center gap-4 text-primary-foreground/90">
-                  
-                  <div className="bg-white/10 p-3 rounded-full transition-colors">
-                    <Phone className="h-6 w-6 text-white group-hover:text-green-400 transition-colors" />
-                  </div>
-
-                  <div className="flex flex-col">
-                    <span className="text-xs uppercase tracking-widest text-primary-foreground/50 font-bold">
-                      Call or text
-                    </span>
-                    <span className="text-xl font-semibold">
-                      (918) 600-4936
-                    </span>
-                  </div>
-
+              {/* PHONE */}
+              <a href="tel:+19186004936" className="flex items-center gap-4 group">
+                <div className="bg-white/10 p-3 rounded-full group-hover:scale-110 transition">
+                  <Phone className="h-6 w-6 text-white group-hover:text-green-400 transition-colors" />
+                </div>
+                <div>
+                  <span className="text-xs uppercase tracking-widest text-white/60 font-bold">
+                    Call or text
+                  </span>
+                  <p className="text-xl font-semibold">(918) 600-4936</p>
                 </div>
               </a>
 
-              <a
-                href="mailto:info@becerraspainting.com"
-                className="flex items-center gap-4 text-primary-foreground/90 group"
-              >
-                <div className="bg-white/10 p-3 rounded-full transition-colors">
-                  <Mail className="h-6 w-6 text-white group-hover:text-red-500 transition-colors" />
+              {/* EMAIL */}
+              <a href="mailto:info@becerraspainting.com" className="flex items-center gap-4 group">
+                <div className="bg-white/10 p-3 rounded-full group-hover:scale-110 transition">
+                  <Mail className="h-6 w-6 text-white group-hover:text-red-400 transition-colors" />
                 </div>
-
-                <div className="flex flex-col">
-                  <span className="text-xs uppercase tracking-widest text-primary-foreground/50 font-bold">
+                <div>
+                  <span className="text-xs uppercase tracking-widest text-white/60 font-bold">
                     Email us
                   </span>
-                  <span className="text-lg">
-                    info@becerraspainting.com
-                  </span>
+                  <p className="text-lg">info@becerraspainting.com</p>
                 </div>
               </a>
 
-              <a 
-                href="https://www.facebook.com/becerra918"
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center gap-4 text-primary-foreground/90 group transition-all"
-              >
-                <div className="bg-white/10 p-3 rounded-full group-hover:bg-[#1877F2] transition-colors">
+              {/* FACEBOOK */}
+              <a href="https://www.facebook.com/becerra918" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+                <div className="bg-white/10 p-3 rounded-full group-hover:bg-[#1877F2] transition">
                   <Facebook className="h-6 w-6 text-white" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-xs uppercase tracking-widest text-primary-foreground/50 font-bold">
+                <div>
+                  <span className="text-xs uppercase tracking-widest text-white/60 font-bold">
                     Follow us
                   </span>
-                  <span className="text-lg">
-                    Becerra's painting & remodel
-                  </span>
+                  <p className="text-lg">Becerra's painting & remodel</p>
                 </div>
               </a>
 
-              <a
-                href="https://www.google.com/maps?q=4810+Nassau+Ave,+Sand+Springs,+Oklahoma+74063"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 text-primary-foreground/90 group"
-              >
-                <div className="bg-white/10 p-3 rounded-full transition-colors">
-                  <MapPin className="h-6 w-6 text-white group-hover:text-[#EA4335] transition-colors" />
+              {/* LOCATION */}
+              <a href="https://www.google.com/maps?q=4810+Nassau+Ave" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+                <div className="bg-white/10 p-3 rounded-full group-hover:scale-110 transition">
+                  <MapPin className="h-6 w-6 text-white group-hover:text-red-400 transition-colors" />
                 </div>
-
-                <div className="flex flex-col">
-                  <span className="text-xs uppercase tracking-widest text-primary-foreground/50 font-bold">
+                <div>
+                  <span className="text-xs uppercase tracking-widest text-white/60 font-bold">
                     Location
                   </span>
-                  <span className="text-lg leading-tight">
+                  <p className="text-lg leading-tight">
                     4810 Nassau Ave, Sand Springs<br />
                     Oklahoma, 74063
-                  </span>
+                  </p>
                 </div>
               </a>
+
             </div>
           </div>
 
-          <div className="rounded-3xl bg-card p-10 shadow-2xl border border-white/10 backdrop-blur-sm">
-            <h3 className="mb-6 text-3xl font-bold text-foreground font-serif italic">
+          {/* FORM */}
+          <div className="rounded-3xl bg-card p-10 shadow-2xl border border-white/10">
+
+            <h3 className="mb-6 text-3xl font-bold font-serif italic">
               Request your free quote
             </h3>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {/* FORM CONTAINER (stagger optimizado SOLO inputs) */}
+            <motion.form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.04
+                  }
+                }
+              }}
+            >
 
-              <input
-                name="firstName"
-                type="text"
-                placeholder="First name"
-                className="rounded-xl border border-input bg-background px-4 py-4 text-sm"
-              />
+              {/* INPUTS */}
+              {[
+                { name: "firstName", placeholder: "First name", type: "text" },
+                { name: "lastName", placeholder: "Last name", type: "text" },
+                { name: "email", placeholder: "Email address", type: "email" },
+                { name: "phone", placeholder: "Phone number", type: "tel" },
+              ].map((field) => (
+                <motion.input
+                  key={field.name}
+                  name={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  className="rounded-xl border border-input bg-background px-4 py-4 text-sm"
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0 }
+                  }}
+                />
+              ))}
 
-              <input
-                name="lastName"
-                type="text"
-                placeholder="Last name"
-                className="rounded-xl border border-input bg-background px-4 py-4 text-sm"
-              />
-
-              <input
-                name="email"
-                type="email"
-                placeholder="Email address"
-                className="rounded-xl border border-input bg-background px-4 py-4 text-sm"
-              />
-
-              <input
-                name="phone"
-                type="tel"
-                placeholder="Phone number"
-                className="rounded-xl border border-input bg-background px-4 py-4 text-sm"
-              />
-
-              <select
+              {/* SELECT */}
+              <motion.select
                 name="service"
-                className="rounded-xl border border-input bg-background px-4 py-4 text-sm"
                 defaultValue=""
+                className="rounded-xl border border-input bg-background px-4 py-4 text-sm"
+                variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
               >
                 <option value="" disabled>Service type</option>
-                <option value="Interior & Exterior painting">Interior & Exterior painting</option>
-                <option value="Installing Doors & Trim">Installing Doors & Trim</option>
-                <option value="Drywall Repair & Install">Drywall Repair & Install</option>
-                <option value="Professional framing">Professional framing</option>
-                <option value="Bathroom remodeling">Bathroom remodeling</option>
-                <option value="Custom & Kitchen cabinets">Custom & Kitchen cabinets</option>
-                <option value="Cabinet Painting & Install">Cabinet Painting & Install</option>
-                <option value="Siding Repair & Install">Siding Repair & Install</option>
-                <option value="Rotten wood replacement">Rotten wood replacement</option>
-                <option value="Custom shutters from scratch">Custom shutters from scratch</option>
-                <option value="Professional roofing">Professional roofing</option>
-                <option value="Professional Cleaning Services">Professional Cleaning Services</option>
-              </select>
+                <option>Interior & Exterior painting</option>
+                <option>Installing Doors & Trim</option>
+                <option>Drywall Repair & Install</option>
+                <option>Bathroom remodeling</option>
+                <option>Custom & Kitchen cabinets</option>
+              </motion.select>
 
-              <textarea
+              {/* TEXTAREA */}
+              <motion.textarea
                 name="message"
-                placeholder="Tell us about your project..."
                 rows={4}
+                placeholder="Tell us about your project..."
                 className="rounded-xl border border-input bg-background px-4 py-4 text-sm resize-none"
+                variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
               />
 
+              {/* HONEYPOT */}
               <input
                 name="company"
                 style={{ display: "none" }}
@@ -210,24 +202,24 @@ export function CtaSection() {
                 autoComplete="off"
               />
 
+              {/* BUTTON (estado visual claro) */}
               <Button
                 type="submit"
-                disabled={loading || success} // Bloquea durante envío o si ya se envió
+                disabled={loading || success}
                 size="lg"
                 className={`
-                  w-full text-lg py-7 rounded-xl font-bold shadow-lg
-                  transition-transform duration-200
+                  w-full text-lg py-7 rounded-xl font-bold shadow-lg transition-all duration-200
                   ${loading ? "bg-gray-400 cursor-wait" : ""}
-                  ${success ? "bg-green-500 text-white cursor-not-allowed" : "hover:scale-[1.02] hover:bg-blue-600"}
+                  ${success ? "bg-green-500 cursor-not-allowed" : "hover:scale-[1.02]"}
                 `}
               >
                 {loading ? "Sending..." : success ? "Sent ✔" : "Send request"}
               </Button>
 
-            </form>
+            </motion.form>
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   )

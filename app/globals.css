@@ -121,8 +121,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html,
   body {
-    @apply bg-background text-foreground;
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
   }
 }
 

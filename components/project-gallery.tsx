@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 
 const categories = [
   "All",
@@ -303,66 +304,113 @@ export function ProjectGallery() {
       : projects.filter((p) => p.category === active)
 
   return (
-    <section id="projects" className="bg-secondary py-24">
+    <section id="projects" className="bg-secondary py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-16 text-center">
+
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
             Our Work
           </span>
-          <h2 className="font-serif text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
+
+          <h2 className="font-serif text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Project catalog
           </h2>
-          {/* Texto dinámico según el filtro */}
+
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground leading-relaxed">
-            {active === "All" 
-              ? "Discover our featured projects. Select a category to see our full portfolio." 
+            {active === "All"
+              ? "Discover our featured projects. Select a category to see our full portfolio."
               : `Showing all our ${active} transformations.`}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mb-10 flex flex-wrap justify-center gap-2">
+        {/* FILTERS */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 flex flex-wrap justify-center gap-2"
+        >
           {categories.map((cat) => (
             <Button
               key={cat}
               variant={active === cat ? "default" : "outline"}
               size="sm"
               onClick={() => setActive(cat)}
-              className="rounded-full font-medium"
+              className="rounded-full font-medium transition-transform active:scale-95"
             >
               {cat}
             </Button>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {/* GRID CON STAGGER REAL */}
+        <motion.div
+          layout
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        >
           {filtered.map((project, index) => (
-            <div
-              key={`${project.title}-${index}`} // Usamos index para evitar errores de keys duplicadas
-              className="group cursor-pointer overflow-hidden rounded-xl bg-card border border-border shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
+            <motion.div
+              key={`${project.title}-${index}`}
+              layout
+              initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.03, // stagger manual tipo Apple
+              }}
+              whileHover={{
+                y: -8,
+                scale: 1.02,
+              }}
+              className="group cursor-pointer overflow-hidden rounded-xl bg-card border border-border shadow-sm transition-all"
             >
+              {/* IMAGE */}
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-foreground/0 transition-colors group-hover:bg-foreground/20" />
-                <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground font-bold uppercase tracking-tighter">
-                  {project.category}
-                </Badge>
+
+                {/* overlay suave */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+
+                {/* badge animado */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground font-bold uppercase tracking-tighter">
+                    {project.category}
+                  </Badge>
+                </motion.div>
               </div>
+
+              {/* TEXT */}
               <div className="p-5">
-                <h3 className="text-lg font-bold text-foreground">
+                <h3 className="text-lg font-bold text-foreground transition-colors group-hover:text-primary">
                   {project.title}
                 </h3>
+
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed font-light">
                   {project.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   )

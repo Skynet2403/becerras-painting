@@ -1,6 +1,9 @@
+"use client"
+
 import { Star } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { motion } from "framer-motion"
 
 const testimonials = [
   {
@@ -55,59 +58,122 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="bg-background py-24">
+    <section id="testimonials" className="bg-background py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-16 text-center">
+
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
             Testimonials
           </span>
-          <h2 className="font-serif text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance italic">
-            What our <span className="text-primary not-italic">clients are saying</span>
+
+          <h2 className="font-serif text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl italic">
+            What our{" "}
+            <span className="text-primary not-italic">clients are saying</span>
           </h2>
+
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground leading-relaxed font-light">
-            Our customers' satisfaction is our best calling card and the greatest 
+            Our customers' satisfaction is our best calling card and the greatest
             proof of our commitment to quality.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* GRID STAGGER */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.08,
+              },
+            },
+          }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {testimonials.map((t) => (
-            <Card
+            <motion.div
               key={t.name}
-              className="border-border bg-card transition-shadow hover:shadow-xl rounded-2xl overflow-hidden h-full"
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  y: 40,
+                  scale: 0.95,
+                  filter: "blur(10px)",
+                },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  filter: "blur(0px)",
+                },
+              }}
+              whileHover={{
+                y: -8,
+                scale: 1.02,
+              }}
+              transition={{ duration: 0.5 }}
             >
-              <CardContent className="p-6 flex flex-col h-full">
-                <div className="mb-4 flex gap-1">
-                  {Array.from({ length: t.stars }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 text-primary"
-                      fill="currentColor"
-                    />
-                  ))}
-                </div>
-                
-                <p className="mb-6 text-sm text-muted-foreground leading-relaxed font-light flex-grow">
-                  {`"${t.text}"`}
-                </p>
+              <Card className="border-border bg-card rounded-2xl overflow-hidden h-full transition-shadow hover:shadow-2xl">
+                <CardContent className="p-6 flex flex-col h-full">
 
-                <div className="flex items-center gap-3 border-t border-border pt-4 mt-auto">
-                  <Avatar className="h-10 w-10">
-                    <AvatarFallback className="bg-primary/10 text-primary text-sm font-bold">
-                      {t.initials}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="text-sm font-bold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-tighter">
-                      Verified Client
-                    </p>
+                  {/* STARS */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="mb-4 flex gap-1"
+                  >
+                    {Array.from({ length: t.stars }).map((_, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.2, rotate: 5 }}
+                      >
+                        <Star
+                          className="h-4 w-4 text-primary"
+                          fill="currentColor"
+                        />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+
+                  {/* TEXT */}
+                  <p className="mb-6 text-sm text-muted-foreground leading-relaxed font-light flex-grow">
+                    {`"${t.text}"`}
+                  </p>
+
+                  {/* FOOTER */}
+                  <div className="flex items-center gap-3 border-t border-border pt-4 mt-auto">
+                    <Avatar className="h-10 w-10">
+                      <AvatarFallback className="bg-primary/10 text-primary text-sm font-bold">
+                        {t.initials}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div>
+                      <p className="text-sm font-bold text-foreground">
+                        {t.name}
+                      </p>
+                      <p className="text-xs text-muted-foreground font-medium uppercase tracking-tighter">
+                        Verified Client
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   )

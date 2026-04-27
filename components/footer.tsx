@@ -1,50 +1,92 @@
+"use client"
+
 import { Paintbrush } from "lucide-react"
+import { motion } from "framer-motion"
 
 export function Footer() {
   return (
-    <footer className="bg-foreground py-16 text-background">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="bg-foreground py-16 text-background"
+    >
       <div className="mx-auto max-w-7xl px-6">
+
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+          {/* LOGO */}
           <div>
-            <div className="mb-4 flex items-center gap-2">
+            <motion.div
+              className="mb-4 flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+            >
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
                 <Paintbrush className="h-5 w-5 text-primary-foreground" />
               </div>
+
               <span className="font-serif text-xl font-bold text-background uppercase tracking-tighter">
                 Becerra's Painting & Remodeling
               </span>
-            </div>
+            </motion.div>
+
             <p className="text-sm text-background/60 leading-relaxed">
-              Premium painting and remodeling services. We transform residential and commercial spaces with expert craftsmanship and attention to detail. 
-              <br /><span className="text-primary font-semibold">Licensed & Insured.</span>
+              Premium painting and remodeling services. We transform residential and commercial spaces with expert craftsmanship and attention to detail.
+              <br />
+              <span className="text-primary font-semibold">Licensed & Insured.</span>
             </p>
           </div>
 
+          {/* LINKS (solo hover suave) */}
           <div>
             <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-background">
               Our services
             </h4>
             <ul className="flex flex-col gap-2 text-sm text-background/60">
-              <li><a href="#services" className="transition-colors hover:text-primary">Interior & Exterior painting</a></li>
-              <li><a href="#services" className="transition-colors hover:text-primary">Full remodeling</a></li>
-              <li><a href="#services" className="transition-colors hover:text-primary">Specialty finishes</a></li>
-              <li><a href="#services" className="transition-colors hover:text-primary">Color consultation</a></li>
-              <li><a href="#services" className="transition-colors hover:text-primary">Maintenance</a></li>
+              {[
+                "Interior & Exterior painting",
+                "Full remodeling",
+                "Specialty finishes",
+                "Color consultation",
+                "Maintenance",
+              ].map((item) => (
+                <li key={item}>
+                  <motion.a
+                    href="#services"
+                    whileHover={{ x: 4 }}
+                    className="transition-colors hover:text-primary"
+                  >
+                    {item}
+                  </motion.a>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* COMPANY */}
           <div>
             <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-background">
               Company
             </h4>
             <ul className="flex flex-col gap-2 text-sm text-background/60">
-              <li><a href="#about" className="transition-colors hover:text-primary">About us</a></li>
-              <li><a href="#projects" className="transition-colors hover:text-primary">Our portfolio</a></li>
-              <li><a href="#testimonials" className="transition-colors hover:text-primary">Reviews</a></li>
-              <li><a href="#contact" className="transition-colors hover:text-primary">Get a free estimate</a></li>
+              {["About us", "Our portfolio", "Reviews", "Get a free estimate"].map(
+                (item) => (
+                  <li key={item}>
+                    <motion.a
+                      href="#"
+                      whileHover={{ x: 4 }}
+                      className="transition-colors hover:text-primary"
+                    >
+                      {item}
+                    </motion.a>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
+          {/* HOURS */}
           <div>
             <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-background">
               Business hours
@@ -55,12 +97,20 @@ export function Footer() {
               <li>Sunday: By appointment only</li>
             </ul>
           </div>
+
         </div>
 
-        <div className="mt-12 border-t border-background/10 pt-8 text-center text-sm text-background/40 font-medium tracking-wide">
+        {/* COPYRIGHT */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mt-12 border-t border-background/10 pt-8 text-center text-sm text-background/40 font-medium tracking-wide"
+        >
           <p>© 2026 Becerra's Painting & Remodeling. Quality service in every stroke.</p>
-        </div>
+        </motion.div>
+
       </div>
-    </footer>
+    </motion.footer>
   )
 }

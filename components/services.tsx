@@ -1,5 +1,8 @@
+"use client"
+
 import { Paintbrush, Home, Hammer, Droplets, Palette, Shield } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { motion } from "framer-motion"
 
 const services = [
   {
@@ -42,41 +45,85 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="bg-background py-24">
+    <section id="services" className="bg-background py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-16 text-center">
+
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
             About our Services
           </span>
-          <h2 className="font-serif text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance italic">
-            Everything your <span className="text-primary not-italic">home needs</span>
+
+          <h2 className="font-serif text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl italic">
+            Everything your{" "}
+            <span className="text-primary not-italic">home needs</span>
           </h2>
+
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground leading-relaxed font-light">
-            We offer a comprehensive range of painting and remodeling services 
+            We offer a comprehensive range of painting and remodeling services
             to transform any space into the home of your dreams.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* GRID STAGGER */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.08
+              }
+            }
+          }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {services.map((service) => (
-            <Card
+            <motion.div
               key={service.title}
-              className="group border-border bg-card transition-all hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 rounded-2xl overflow-hidden"
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" },
+                show: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+              }}
+              whileHover={{
+                y: -10,
+                scale: 1.03
+              }}
+              transition={{ duration: 0.5 }}
             >
-              <CardContent className="p-8">
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <service.icon className="h-7 w-7" />
-                </div>
-                <h3 className="mb-3 text-xl font-bold text-foreground font-serif italic">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm font-light">
-                  {service.description}
-                </p>
-              </CardContent>
-            </Card>
+              <Card className="group border-border bg-card transition-all rounded-2xl overflow-hidden hover:shadow-2xl hover:border-primary/40">
+                <CardContent className="p-8">
+
+                  {/* ICON ANIMADO */}
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 3 }}
+                    className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"
+                  >
+                    <service.icon className="h-7 w-7" />
+                  </motion.div>
+
+                  <h3 className="mb-3 text-xl font-bold text-foreground font-serif italic group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-muted-foreground leading-relaxed text-sm font-light">
+                    {service.description}
+                  </p>
+
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   )
