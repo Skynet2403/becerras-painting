@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X, Paintbrush } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -15,22 +15,35 @@ const navLinks = [
 export function Navbar() {
   const [open, setOpen] = useState(false)
 
+  // 🔥 Bloquea scroll cuando el menú está abierto
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : ""
+  }, [open])
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#home" className="flex items-center gap-2 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary group-hover:rotate-12 transition-transform">
-            <Paintbrush className="h-5 w-5 text-primary-foreground" />
+      
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+        
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2 group min-w-0">
+          
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-primary group-hover:rotate-12 transition-transform">
+            <Paintbrush className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
           </div>
-          <span className="font-serif text-xl font-bold text-foreground tracking-tighter uppercase italic">
-            <span className="font-serif text-xl font-bold text-foreground tracking-tighter uppercase italic text-nowrap">
-            Becerra's <span className="text-primary not-italic font-black ml-1.5">Painting & Remodeling</span>
+
+          <span className="font-serif text-sm sm:text-xl font-bold text-foreground tracking-tighter uppercase italic truncate">
+            <span className="break-words">
+              Becerra's{" "}
+              <span className="text-primary not-italic font-black ml-1.5 inline-block">
+                Painting & Remodeling
+              </span>
             </span>
           </span>
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 lg:gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -44,15 +57,18 @@ export function Navbar() {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <Button asChild className="rounded-xl px-6 font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+          <Button
+            asChild
+            className="rounded-xl px-4 sm:px-6 py-2 font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform text-sm"
+          >
             <a href="#contact">Free estimate</a>
           </Button>
         </div>
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-foreground"
-          onClick={() => setOpen(!open)}
+          className="md:hidden text-foreground p-2 active:scale-95 transition-transform"
+          onClick={() => setOpen(prev => !prev)}
           aria-label={open ? "Close menu" : "Open menu"}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -61,8 +77,9 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="border-t border-border bg-card px-6 py-6 md:hidden animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="border-t border-border bg-card px-4 sm:px-6 py-6 md:hidden animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex flex-col gap-6">
+            
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -73,11 +90,16 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <Button asChild className="w-full py-6 rounded-xl text-base font-bold">
+
+            <Button
+              asChild
+              className="w-full py-5 sm:py-6 rounded-xl text-base font-bold"
+            >
               <a href="#contact" onClick={() => setOpen(false)}>
                 Free estimate
               </a>
             </Button>
+
           </div>
         </div>
       )}

@@ -49,13 +49,19 @@ export function CtaSection() {
             <p className="mt-4 max-w-lg text-lg text-primary-foreground/80 leading-relaxed font-light">
               Contact us today and get a free estimate. Our team of experts is 
               ready to bring the home of your dreams to life with the best quality in Oklahoma.
+
+              <br /><br />
+
+              <span className="sm:hidden font-medium">
+                Tap any option below to call, message, or get directions instantly.
+              </span>
             </p>
 
             <div className="mt-8 flex flex-col gap-6">
 
               <a
                 href="tel:+19186004936"
-                className="mt-8 flex flex-col gap-6 group"
+                className="mt-8 flex flex-col gap-2 group"
               >
                 <div className="flex items-center gap-4 text-primary-foreground/90">
                   
@@ -103,8 +109,12 @@ export function CtaSection() {
                   <Facebook className="h-6 w-6 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xs uppercase tracking-widest text-primary-foreground/50 font-bold">Follow us</span>
-                  <span className="text-lg">Becerra's painting & remodel</span>
+                  <span className="text-xs uppercase tracking-widest text-primary-foreground/50 font-bold">
+                    Follow us
+                  </span>
+                  <span className="text-lg">
+                    Becerra's painting & remodel
+                  </span>
                 </div>
               </a>
 
@@ -115,12 +125,9 @@ export function CtaSection() {
                 className="flex items-center gap-4 text-primary-foreground/90 group"
               >
                 <div className="bg-white/10 p-3 rounded-full transition-colors">
-
                   <MapPin className="h-6 w-6 text-white group-hover:text-[#EA4335] transition-colors" />
-
                 </div>
 
-                {/* TEXTO */}
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-widest text-primary-foreground/50 font-bold">
                     Location
@@ -131,7 +138,6 @@ export function CtaSection() {
                   </span>
                 </div>
               </a>
-
             </div>
           </div>
 

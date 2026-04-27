@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* =========================
+   VARIABLES
+========================= */
 :root {
   --background: oklch(0.98 0.005 75);
   --foreground: oklch(0.22 0.02 50);
@@ -74,6 +77,9 @@
   --sidebar-ring: oklch(0.72 0.17 50);
 }
 
+/* =========================
+   THEME
+========================= */
 @theme inline {
   --font-sans: var(--font-dm-sans), 'DM Sans', sans-serif;
   --font-serif: var(--font-playfair), 'Playfair Display', serif;
@@ -106,16 +112,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* =========================
+   BASE
+========================= */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -125,18 +126,34 @@
   }
 }
 
+/* =========================
+    MARQUEE OPTIMIZADO
+========================= */
+
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-33.33%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
 }
+
+
+@media (min-width: 640px) {
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+}
+
+/* =========================
+   SCROLL
+========================= */
 
 html {
   scroll-behavior: smooth;
