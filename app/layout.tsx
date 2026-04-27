@@ -14,9 +14,14 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'ColorCraft Pro | Painting & Remodeling',
+  title: "Becerra's Painting & Remodeling",
   description:
     'We transform your home with professional painting and remodeling services. Check out our portfolio of completed projects.',
+    icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/apple-icon.png',
+  },
 }
 
 export const viewport: Viewport = {
